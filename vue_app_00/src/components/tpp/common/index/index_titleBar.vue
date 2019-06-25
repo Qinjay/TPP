@@ -7,9 +7,9 @@
                 <i class="iconfont icon-xiajiantou"></i>
             </a>
             <div class="t1rigt">
-                <a href="javascript:;"><img src="../../../assets/saoyisao.png" alt=""></a>
-                <a href="javascript:;"><img src="../../../assets/rili.png" alt=""></a>
-                <a href="javascript:;"><img src="../../../assets/sousuo.png" alt=""></a>
+                <a href="javascript:;"><img src="../../../../assets/saoyisao.png" alt=""></a>
+                <a href="javascript:;"><img src="../../../../assets/rili.png" alt=""></a>
+                <a href="javascript:;"><img src="../../../../assets/sousuo.png" alt=""></a>
             </div>
         </div>
         
@@ -89,7 +89,7 @@ export default {
         top: 13px;
         right: 12px;
         font-size: 12px;
-        color: #555;
+        color: #8f8f94;
         z-index:2;
         overflow: hidden;
     }

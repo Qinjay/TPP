@@ -1,19 +1,23 @@
 <template>
     <div class="onmovie">
         <div class="onmovietop">
-            <p>热门演出</p> 
-            <!-- <a href="javascript:;" class="weeklist"><img src="../../../assets/paixingbang.png" alt=""> 想看榜</a> -->
+            <p>即将上映</p> 
+            <a href="javascript:;" class="weeklist"><img src="../../../../assets/paixingbang.png" alt=""> 想看榜</a>
             <a href="javascript:;">全部<i class="iconfont icon-gengduo"></i> </a>
         </div>
-         <ul class="onmoviebot" :style="{'margin-left':marginL+'px'}" @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend">
-            <li v-for="(i) of 10" :key="i">
+         <ul class="onmoviebot"  :style="{'margin-left':marginL+'px'}" @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend">
+            <li v-for="(i) of 9" :key="i">
                 <a href="javascript:;" class="onmoviebotImg">
                     <img src="hyr01.jpg" alt="">
-                    <p class="screen">演唱会</p>
-                    <i class="collect">9.2折</i>
-                    <p class="mtitle">费玉清告别演唱会费玉清告别演唱会</p>
+                    <p class="screen">3D IMAX</p>
+                    <i class="iconfont icon-aixin collect"></i>
+                    <p class="score">73.5万人想看</p>
+                    <p class="mtitle">黑衣人：全。。。</p>
                 </a>
                 <a href="javascript:;" class="release-time">6月8日</a>
+            </li>
+            <li class="goMoreMovie">
+                <a href="javascript:;">查看全部</a>
             </li>
         </ul> 
 
@@ -57,6 +61,8 @@ export default {
     },
 }
 </script>
+
+
 <style scoped>
 .onmovie{
     margin:10px 0;
@@ -82,13 +88,13 @@ export default {
         border-radius: 5px;
         color: #F6A553;
     }
-    .onmovietop>a{
+    .onmovietop>a+a{
         float:right;
         /* margin-right:0.7rem; */
         color:#555;
         font-size:0.9rem;
     }
-    .onmoviebot{display: flex}
+    .onmoviebot{display: -webkit-box;}
     .onmoviebot>li{padding-right:8px;}
     .onmoviebotImg{
         display: block;
@@ -116,16 +122,13 @@ export default {
     }
     .collect{
         position: absolute;
-        top: 24px;
-        left: 3px;
+        top: 0px;
+        right: 0px;
         color: #fff;
-        border-radius: 5px;
-        width: 36px;
-        height: 16px;
-        line-height: 16px;
+        background: rgba(255,255,255,0.3);
+        border-radius: 2px;
+        width: 22px;
         text-align: center;
-        font-size: 10px;
-        background-image: linear-gradient(to right, #FFDF62 0%, #FECD0F 100%);
     }
     .score{
         position: absolute;
@@ -140,6 +143,21 @@ export default {
     }
     .release-time{
         font-size: 10px;
-        color:#555;
+        color:#8f8f94;
     }
+    .goMoreMovie{
+        width: 128px;
+        height: 172px;
+        position: relative;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+    }
+    .goMoreMovie>a{
+        position: absolute;
+        top: 50%;
+        left: 21%;
+        color: #8f8f94;
+        white-space: nowrap;
+    }
+
 </style>

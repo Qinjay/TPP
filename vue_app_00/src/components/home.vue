@@ -10,10 +10,10 @@
             <!-- 3.切换的面板列表 -->
             <mt-tab-container class="page-tabbar-container" v-model="active">
                 <mt-tab-container-item id="index">
-                   <index></index>
+                   <index></index> <!--首页-->
                 </mt-tab-container-item>
                 <mt-tab-container-item id="movie">
-                    movie<!-- <message-list></message-list> -->
+                    <movie-list></movie-list> <!--详情-->
                 </mt-tab-container-item>
                 <mt-tab-container-item id="video">
                     video<!-- <message-list></message-list> -->
@@ -22,7 +22,7 @@
                     show<!-- <message-list></message-list> -->
                 </mt-tab-container-item>
                 <mt-tab-container-item id="me">
-                    me<!-- <message-list></message-list> -->
+                   <me></me>
                 </mt-tab-container-item>
             </mt-tab-container>
         
@@ -60,7 +60,8 @@
 // import titleBar from "./tpp/titleBar.vue";
 import tabBarIcon from "./tpp/tabBarIcon.vue";
 import index from "./tpp/common/index.vue"
-
+import movieList from "./tpp/common/movieList.vue";
+import me from "./tpp/common/me.vue"
 export default {
     data(){return{
         active:"index",
@@ -73,13 +74,14 @@ export default {
             {isSelect:false}
         ]
     }},
-    components:{tabBarIcon,index},
+    components:{tabBarIcon,index,movieList,me},
     methods:{
         change(n){
             for(var i=0;i<this.currentIndex.length;i++){
                 this.currentIndex[i].isSelect=false;
                 }
             this.currentIndex[n].isSelect=true;
+            window.scrollTo(0,0)  //
             },
         mysearch(){}
     }
