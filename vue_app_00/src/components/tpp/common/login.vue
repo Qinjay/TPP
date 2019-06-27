@@ -1,28 +1,28 @@
 <template>
     <div class="login" :style="{height:Height+'px'}">
         <div class="loginTitle">
-            <i class="iconfont icon-fanhui"></i>
+            <router-link to="/" class="iconfont icon-fanhui"></router-link>
         </div>
         <div class="logo"><img src="taobao.png" alt=""></div>
         <div class="uName">
             <span v-show="isTell">+86<i class="iconfont icon-gengduo"></i></span>
-            <input type="text" :placeholder=unamePlaceholder v-model="value">
+            <input type="text" :placeholder=unamePlaceholder v-model="value" name="uname">
             <span v-show=value.length @click="unameDel">✖</span>
         </div>
         <div class="uPwd">
             <!-- <div class="uPwd-left"> -->
                 <img :src= upwdImg alt="" v-show="!isTell" @click="upwdchange()">
-                <input :type= upwdType :placeholder=upwdPlaceholder v-model="value1">
+                <input :type= upwdType :placeholder=upwdPlaceholder v-model="value1" name="upwd">
                 <span v-show=value1.length @click="upwdDel">✖</span>
             <!-- </div> -->
             <router-link to="" class="myfont" v-show="isTell">获取验证码</router-link>
             <router-link to="" class="myfont" v-show="!isTell">忘记密码</router-link>
         </div>
-        <button type="submit" class="btnlogin" :disabled=isDisable @change="btnChange">登录</button>
+        <button class="btnlogin" :disabled=isDisable >登录</button>
         <div class="botChange">
             <span @click="changelog" class="myfont" v-show="!isTell">短信验证码登录</span>
             <span @click="changelog" class="myfont" v-show="isTell">淘宝账户登录</span>
-            <router-link to="" class="myfont">注册</router-link>   <!--register-->
+            <router-link to="/register" class="myfont">注册</router-link>   <!--register-->
         </div>
     </div>
 </template>
@@ -91,12 +91,12 @@ export default {
         upwdDel(){
             this.value1="";
         },
-        btnChange(){
-            console.log(this.value,this.value1)
-            if(this.value.length!=0&&this.value1.length!=0){
-                this.isDisable=false;
-            }
-        }
+        // btnChange(){
+        //     console.log(this.value,this.value1)
+        //     if(this.value.length!=0&&this.value1.length!=0){
+        //         this.isDisable=false;
+        //     }
+        // }
     }
 }
 </script>
@@ -119,7 +119,7 @@ export default {
     height:30px;
 }
     .uName,.uPwd{
-        border-bottom: 1px solid #ef4a4a;
+        border-bottom: 1px solid #ff5000;
     }
     .uName>input{
         width:80%;

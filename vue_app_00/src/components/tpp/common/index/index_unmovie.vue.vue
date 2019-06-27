@@ -100,11 +100,11 @@ export default {
         display: block;
         width:120px;
         position: relative;
-        /* height: 150px; */
+        height: 215px;
     }
     .onmoviebotImg>img{
         width:100%;
-        height:100%;
+        height:85%;
         border-radius: 3px;
     }
     .screen{

@@ -21,15 +21,15 @@
             <div style="height:40px" v-show="t2Top<=-44"></div>
                 <mt-tab-container v-model="active">
                     <mt-tab-container-item id="t2-onmovie">
-                        <div class="t2-onmovie-com" v-for="(item,i) of 6" :key="i">
+                        <div class="t2-onmovie-com" v-for="(item,i) of movielist" :key="i">
                             <div>
-                                <a href="javascript:;" class="t2-onmovie-com-left"><img src="qyqx.jpg" alt=""></a>
+                                <a href="javascript:;" class="t2-onmovie-com-left"><img :src="'/movied/'+item.id+'.jpg'" alt=""></a>
                                 <a href="javascript:;" class="t2-onmovie-com-mid">
                                     <div>
-                                        <p><span class="mtitle">千与千寻</span><span class="screen" :class="{'screen-2D':true,'screen-3D':false}"><img src="screen.png" alt=""></span> </p>
-                                        <p class="score">淘票票评分 <span class="myfont1">9.6</span></p>
-                                        <p class="direct">导演：<span>宫崎骏</span></p>
-                                        <p class="star">主演：<span>周冬雨 井柏然</span></p>
+                                        <p><span class="mtitle">{{item.title}}</span><span class="screen" :class="{'screen-2D':true,'screen-3D':false}"><img src="screen.png" alt=""></span> </p>
+                                        <p class="score">淘票票评分 <span class="myfont1">{{item.rating.average}}</span></p>
+                                        <p class="direct">导演：<span>{{item.directors[0].name}}</span></p>
+                                        <p class="star">主演：<span v-for="(s,i) of item.casts" :key="i">{{s.name}} <span v-show="i<item.casts.length-1"> / </span></span></p>
                                         <p><span class="tohost">今日最热</span><span class="tobast">口碑最佳</span></p>
                                    </div>
                                    <div class="t2-onmovie-com-right">
@@ -57,19 +57,34 @@ export default {
         myCol:0,
         active:'t2-onmovie',
         listmovieY:0,
-        t2Top:100
+        t2Top:100,
+        // 电影
+        count:0,
+        movielist:[]
     }},
      mounted(){
         window.addEventListener("scroll",this.listmovieYChange);
+        this.loadMovieList();
+
     },
     methods:{
+        //加载电影列表
+        loadMovieList(){
+           //  var url="http://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a&start=0&count=5";
+            // var params={};
+            var url="../../../data.json";
+            this.axios.get(url).then(result=>{
+                this.movielist=result.data.subjects;
+                this.count=this.movielist.length;
+                // console.log(this.movielist,this.movielist.mainland_pubdate);
+            }).catch(err=>{console.log(err)})
+        },
         changeCol(i){
             this.myCol=i;
             this.active=this.tab[i]
         },
         listmovieYChange(){
             this.t2Top=this.$refs.t2fixed.getBoundingClientRect().top;//获取当前元素到屏幕顶端的距离
-            // console.log(this.t2Top)
         }
     },
     components:{unmovie}
@@ -178,9 +193,10 @@ export default {
         padding: 0 6px 6px 6px;
         border-bottom: 1px solid #ddd;
     }
+    .t2-onmovie-com-mid>div:first-child{width:74%}
     .t2-onmovie-com-mid p{margin:3px;color:#8f8f94;font-size:14px;}
    .t2-onmovie-com-mid .mtitle{
-        font-size:22px;
+        font-size:20px;
         color: #000;
         margin-right: 4px;
         }

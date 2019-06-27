@@ -3,15 +3,15 @@
         <div class="onmovietop">
             <p>热映影片</p> 
             <a href="javascript:;" class="weeklist"><img src="../../../../assets/paixingbang.png" alt=""> 周票房榜</a>
-            <a href="javascript:;">全部39部<i class="iconfont icon-gengduo"></i> </a>
+            <a href="javascript:;">全部{{count}}部<i class="iconfont icon-gengduo"></i> </a>
         </div>
          <ul class="onmoviebot" :style="{'margin-left':marginL+'px'}" @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend">
-            <li v-for="(i) of 9" :key="i">
+            <li  v-for="(item,i) of movielist" :key="i" v-if="i<9">
                 <a href="javascript:;" class="onmoviebotImg">
-                    <img src="hyr01.jpg" alt="">
+                    <img :src="'/movied/'+item.id+'.jpg'" alt="">
                     <p class="screen">3D IMAX</p>
-                    <p class="score">淘票票评分 7.0</p>
-                    <p class="mtitle">黑衣人：全。。。</p>
+                    <p class="score">淘票票评分 {{item.rating.average}}</p>
+                    <p class="mtitle">{{item.title.slice(0,7)}}<span v-show="item.title.length>7">...</span></p>
                 </a>
                 <a href="javascript:;" class="pay">购票</a>
             </li>
@@ -31,10 +31,25 @@ export default {
         xchange:0, //x 改变值 x3-x1
         marginL:0, //margin-left
         screenWidth:document.body.clientWidth,
-        movieW:0
+        movieW:0,
+        //电影
+        count:0,
+        movielist:[]
        
     }},
+    created(){
+         this.loadMovieList();
+    },
      methods:{
+         loadMovieList(){
+           //  var url="http://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a&start=0&count=5";
+            var url="../../../data.json";
+            this.axios.get(url).then(result=>{
+                this.movielist=result.data.subjects;
+                this.count=this.movielist.length;
+                console.log(this.movielist);
+            }).catch(err=>{console.log(err)})
+        },
         touchstart(e){ //按下
             this.x1=e.touches[0].pageX;
         },
@@ -101,11 +116,11 @@ export default {
         width:120px;
         position: relative;
         margin-right:8px;
-        /* height: 150px; */
+        height:215px;
     }
     .onmoviebotImg>img{
         width:100%;
-        height:100%;
+        height:85%;
         border-radius: 3px;
     }
     .screen{
