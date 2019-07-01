@@ -6,7 +6,7 @@ import axios from "axios"
 //3.设置跨域请求保存session
 axios.defaults.withCredentials=true;
 //4.设置请求服务器基础路径
-//axios.defaults.baseURL="http://api.douban.com/v2/";
+//axios.defaults.baseURL="http://127.0.0.1:3000/";
 ///5.注册axios 
 Vue.prototype.axios=axios;
 

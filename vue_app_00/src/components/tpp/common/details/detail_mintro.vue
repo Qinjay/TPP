@@ -8,12 +8,11 @@
 </template>
 <script>
 export default {
-    data(){return{}},
+    data(){return{ isShow:false}},
     props:{
         Mdatail:"",
-        isShow:false
         },
-  
+    
     methods:{
         getMore(){
             this.isShow=true;

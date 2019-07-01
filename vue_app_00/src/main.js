@@ -8,6 +8,9 @@ import MintUI from 'mint-ui'
 import'mint-ui/lib/style.css'
 import'./font/iconfont.css'//引入字体图标文件
 import axios from './axios.js'//引入axios.js文件
+// import MP from './map.js'
+import qs from 'qs';  //映入qs  post请求
+Vue.prototype.qs=qs
 //3.将mint-ui组件库中组件注册Vue实例中
 Vue.use(MintUI);
 Vue.config.productionTip = false

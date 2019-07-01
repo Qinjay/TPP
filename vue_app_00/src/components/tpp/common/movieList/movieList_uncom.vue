@@ -3,10 +3,10 @@
         <div class="hostprevue">
             <p>热门预告片</p>
             <div  :style="{'margin-left':marginL+'px'}" @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend">
-                <div v-for="(item,i) of 6" :key="i">
+                <div v-for="(item,i) of 4" :key="i">
                     <a href="javascript:;" class="prevueImg">
-                        <img src="hyr03.jpg" alt="" >
-                        <img src="bofang.png" alt="">
+                        <video :src="'trailer/'+i+'.mp4'" controls></video>
+                        <!-- <img src="bofang.png" alt=""> -->
                     </a>
                 </div>
             </div>
@@ -82,12 +82,12 @@ export default {
         position: relative;
         /* margin-right:5px; */
     }
-     .prevueImg img:first-child{
+     .prevueImg video{
         display: block;
         width:100%;
         height: auto;
     } 
-    .prevueImg>img+img{
+    .prevueImg>img{
         position: absolute;
         top: 35%;
         left: 42%;

@@ -1,15 +1,15 @@
 <template>
     <div class="commovie" ref="commovie">
-        <div class="commovie-top" :class="{'comtop-fixed':commovieF<=46}">
+        <div class="commovie-top" :class="{'comtop-fixed':commovieF>1100}">
             <p id="recommend"  @click="indexChange(0)" :class="{'myfont':mc==0}">精选推荐</p>
             <p id="attention"  @click="indexChange(1)" :class="{'myfont':mc==1}">我关注的</p>
             <span><i class="iconfont icon-shuaxin"></i>获取新内容</span>
         </div>
-        <div style="height:37px;width:100%" v-show="commovieF<=46"></div>
+        <div style="height:37px;width:100%" v-show="commovieF>1100"></div>
         <mt-tab-container v-model="active" class="commovie-tab" swipeable>
             <mt-tab-container-item id="recommend">
                 <!-- <mt-cell> -->
-                    <div class="recommendTab">
+                    <div class="recommendTab" v-for="(item,i) of 5" :key="i">
                         <a href="javascript:;" class="recommendTab-top">
                             <div class="reTab-top-img"><img src="hyr01.jpg" alt=""></div> <!--电影图片-->
                             <div class="recommendTab-top-mid">
@@ -61,7 +61,8 @@ export default {
             this.mc=i  
         },
         commovieYChange(){
-          this.commovieF=this.$refs.commovie.getBoundingClientRect().top;
+          this.commovieF=window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            // console.log(this.commovieF)
         }
     }
 }

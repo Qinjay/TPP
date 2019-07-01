@@ -15,7 +15,7 @@ export default {
 <style>
    .app-container{
      padding-top:0px;
-     padding-bottom:58px;
+     padding-bottom:30px;
      overflow-x:hidden;
      background:aliceblue;
    }

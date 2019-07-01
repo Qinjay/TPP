@@ -18,7 +18,7 @@
             <router-link to="" class="myfont" v-show="isTell">获取验证码</router-link>
             <router-link to="" class="myfont" v-show="!isTell">忘记密码</router-link>
         </div>
-        <button class="btnlogin" :disabled=isDisable >登录</button>
+        <button class="btnlogin" :disabled=isDisable @click="login">登录</button>
         <div class="botChange">
             <span @click="changelog" class="myfont" v-show="!isTell">短信验证码登录</span>
             <span @click="changelog" class="myfont" v-show="isTell">淘宝账户登录</span>
@@ -27,6 +27,7 @@
     </div>
 </template>
 <script>
+import bus from './bus.js'
 export default {
     data(){return{
         Height:window.innerHeight,
@@ -38,7 +39,9 @@ export default {
         upwdType:"password",
         unamePlaceholder:"请输入淘宝账户",
         upwdPlaceholder:"请输入密码",
-        isDisable:true
+        isDisable:true,
+        zname:"" , //用户名
+        username:''
     }},
     computed:{
         btnSel(){
@@ -60,6 +63,25 @@ export default {
         }
     },
     methods:{
+        login(){
+            let params={uname:this.value,upwd:this.value1}
+            // console.log( params)
+            this.axios.get("http://localhost:3000/user/login",{params}).then((result)=>{
+                if(result.data.code==400){
+                    this.$toast({
+                        message:"用户名或密码错误",
+                        duration: 3000
+                    })
+                }else{
+                    this.zname=result.data.data+this.value.slice(-5,-1);
+                    sessionStorage.setItem('username', this.zname);
+                    // console.log(username)
+                    //bus.$emit("val",this.zname) //组件间传值--me-login.vue
+                    this.$router.push("home");
+                    // console.log(result.data,this.zname)
+                }
+            })
+        },
         changelog(){
             if(this.isTell){
                 this.isTell=false;
@@ -91,12 +113,6 @@ export default {
         upwdDel(){
             this.value1="";
         },
-        // btnChange(){
-        //     console.log(this.value,this.value1)
-        //     if(this.value.length!=0&&this.value1.length!=0){
-        //         this.isDisable=false;
-        //     }
-        // }
     }
 }
 </script>
@@ -133,7 +149,7 @@ export default {
          height:55px;
         }
     .uPwd input{
-        width:70%;
+        width:65%;
         font-size: 16px;
     }
     .logo{

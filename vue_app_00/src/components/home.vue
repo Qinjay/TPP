@@ -16,7 +16,7 @@
                     <movie-list></movie-list> <!--详情-->
                 </mt-tab-container-item>
                 <mt-tab-container-item id="video">
-                    video<!-- <message-list></message-list> -->
+                    <cinema></cinema><!-- <message-list></message-list> -->
                 </mt-tab-container-item>
                 <mt-tab-container-item id="show">
                     show<!-- <message-list></message-list> -->
@@ -38,7 +38,7 @@
             </mt-tab-item>
             <mt-tab-item id="video" @click.native="change(2)">
                 <tabBarIcon :selectedImage="require('../assets/icon3.png')" :normalImage="require('../assets/icon03.png')" :focused="currentIndex[2].isSelect"></tabBarIcon>
-                <span class="normal" :class="{selcolor:currentIndex[2].isSelect}">淘气视屏</span>
+                <span class="normal" :class="{selcolor:currentIndex[2].isSelect}">影院</span>
             </mt-tab-item>
             <mt-tab-item id="show" @click.native="change(3)">
                 <tabBarIcon :selectedImage="require('../assets/icon4.png')" :normalImage="require('../assets/icon04.png')" :focused="currentIndex[3].isSelect"></tabBarIcon>
@@ -62,6 +62,7 @@ import tabBarIcon from "./tpp/tabBarIcon.vue";
 import index from "./tpp/common/index.vue"
 import movieList from "./tpp/common/movieList.vue";
 import me from "./tpp/common/me.vue"
+import cinema from "./tpp/common/cinema.vue"
 export default {
     data(){return{
         active:"index",
@@ -74,7 +75,7 @@ export default {
             {isSelect:false}
         ]
     }},
-    components:{tabBarIcon,index,movieList,me},
+    components:{tabBarIcon,index,movieList,cinema,me},
     methods:{
         change(n){
             for(var i=0;i<this.currentIndex.length;i++){
@@ -94,9 +95,12 @@ export default {
     .page-tabbar{overflow: hidden;}
     .page-wrap{
         overflow:auto;
-        /* padding-bottom: 46px; */
+         padding-bottom: 28px; 
+         background:#fff;
     }
     .normal{color: #555}
     .selcolor{color:#FF627F}
-
+    .mint-tabbar.is-fixed{
+        background:#fff;
+    }
 </style>

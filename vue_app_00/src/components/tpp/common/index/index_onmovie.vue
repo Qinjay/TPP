@@ -7,7 +7,7 @@
         </div>
          <ul class="onmoviebot" :style="{'margin-left':marginL+'px'}" @touchstart="touchstart" @touchmove="touchmove" @touchend="touchend">
             <li  v-for="(item,i) of movielist" :key="i" v-if="i<9">
-                <a href="javascript:;" class="onmoviebotImg">
+                <a href="javascript:;" class="onmoviebotImg" @click="goDetail(item.id)">
                     <img :src="'/movied/'+item.id+'.jpg'" alt="">
                     <p class="screen">3D IMAX</p>
                     <p class="score">淘票票评分 {{item.rating.average}}</p>
@@ -34,20 +34,24 @@ export default {
         movieW:0,
         //电影
         count:0,
-        movielist:[]
+        movielist:[],
+        id:0
        
     }},
     created(){
          this.loadMovieList();
     },
      methods:{
+         goDetail(id){
+             this.$router.push(`/detail/${id}`)
+         },
          loadMovieList(){
            //  var url="http://api.douban.com/v2/movie/in_theaters?apikey=0df993c66c0c636e29ecbb5344252a4a&start=0&count=5";
             var url="../../../data.json";
             this.axios.get(url).then(result=>{
                 this.movielist=result.data.subjects;
                 this.count=this.movielist.length;
-                console.log(this.movielist);
+                // console.log(this.movielist);
             }).catch(err=>{console.log(err)})
         },
         touchstart(e){ //按下

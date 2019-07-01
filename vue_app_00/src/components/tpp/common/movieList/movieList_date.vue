@@ -1,22 +1,24 @@
 <template>
-    <div class="movie-date">
+<div>
+    <div class="movie-date" v-for="(item,i) of unMovies" :key="i">
         <div class="movie-date-top">
-            <p>周二</p>
-            <p>6月25日</p>
+            <!-- <p>周二</p> -->
+            <p>{{item.release_time.slice(6,7)}}月{{item.release_time.slice(8,10)}}日</p>
         </div>
         <div class="movie-date-bot">
             <a href="javascript:;" class="movie-dateImg">
-                <img src="bb.jpg" alt="">
+                <img :src="'/mymovie/'+item.mid+'.jpg'" alt="">
             </a>
             <a href="javascript:;" class="moviedate-mid">
-                <p class="mtitle">八佰</p>
+                <p class="mtitle">{{item.mtitle}}</p>
                 <p><span class="myfont1">31.2</span>万人想看</p>
-                <p>导演：管虎</p>
-                <p>主演：姜武、张译。。。</p>
+                <p>导演：{{item.mdirect}}</p>
+                <p>主演：{{item.mstar}}</p>
             </a>
             <a href="javascript:;" class="wantWatch">想看</a>
         </div>
     </div>
+</div>
 </template>
 <style>
 .myfont1{
@@ -44,6 +46,7 @@
     }
     .moviedate-mid{
         padding-left: 10px;
+        width:53%
     }
     .mtitle{
         font-size:22px;
@@ -63,3 +66,19 @@
        background-image: linear-gradient(90deg, #FFDF62 0%, #FECD0F 100%);
     }
 </style>
+<script>
+export default {
+    data(){return{
+        unMovies:[],
+        isonload:0
+    }},
+    created(){
+        // 表movie_list  isonload=0
+        this.axios.get("http://localhost:3000/user/unmovie",{params:{isonload:this.isonload}}).then((data)=>{
+             this.unMovies=data.data.data
+            // console.log( this.unMovies)
+        })
+    },
+}
+</script>
+

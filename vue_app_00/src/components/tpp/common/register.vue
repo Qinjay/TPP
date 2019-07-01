@@ -5,14 +5,14 @@
             <span>快速注册</span>
         </div>
         <div class="uName">
-            <input type="number" placeholder="请输入手机号码" v-model="value" name="uname">
+            <input type="number" placeholder="请输入手机号码" v-model="value" name="uname" >
             <span v-show=value.length @click="unameDel">✖</span>
         </div>
         <div class="uPwd">
             <input type="text" placeholder="请输入验证码" v-model="value1" maxlength="6" name="upwd">
-            <router-link to="" class="myfont">获取验证码</router-link>
+            <span to="" class="myfont" @click="getTelNum">获取验证码</span>
         </div>
-        <button class="regbtn" :disabled=isDisable>同意协议并注册</button>
+        <button class="regbtn" :disabled=isDisable @click="reg">同意协议并注册</button>
         <p>我已阅读并同意以下协议 
             <router-link to="">《淘宝平台服务协议》</router-link>、
             <router-link to="">《隐式权政策》</router-link>、
@@ -21,12 +21,15 @@
     </div>
 </template>
 <script>
+
 export default {
     data(){return{
         value:"",
         value1:"",
         isDisable:true,
-        Height:window.innerHeight
+        Height:window.innerHeight,
+        yzm:0,
+        zname:'',
     }},
     computed:{
         regbtn(){
@@ -48,7 +51,47 @@ export default {
     methods:{
         unameDel(){
             this.value=""
-        }
+        },
+        getTelNum(){
+            var reg=/^1[34578]\d{9}$/;
+            if(!reg.test(this.value)){
+                this.$toast({
+                     message: '输入正确手机号',
+                     duration: 3000
+                })
+            }else{
+                this.yzm=parseInt(Math.random()*1000000);
+                console.log(this.yzm)
+                this.$toast({
+                     message: `验证码为${this.yzm}`,
+                     duration: 3000
+                })
+            }
+        },
+        reg(){
+            if(this.value1==this.yzm){
+                let params={uname:this.value,upwd:this.yzm}
+              console.log(params)
+                   this.axios.get("http://localhost:3000/user/reg",{params}).then((result)=>{
+                    if(result.data.code==200){
+                        // console.log(result)
+                        this.zname=result.data.data+this.value.slice(-5,-1);
+                        sessionStorage.setItem('username', this.zname);
+                       this.$router.push("/home")
+                    }else{
+                        this.$toast({
+                        message: `注册失败，稍后再试`,
+                        duration: 3000
+                        })
+                    }
+               })
+             }else{
+                 this.$toast({
+                     message: `验证码为有误`,
+                     duration: 3000
+                 })
+             }
+        },
     }
 }
 </script>

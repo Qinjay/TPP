@@ -4,7 +4,8 @@
             <div class="logDiv">
                 <div class="loginImg">
                     <img src="login.jpg" alt="">
-                    <p class="log">立即登录</p>
+                    <p class="log" v-show="logname==''">立即登录</p>
+                    <p class="log"  v-show="logname">{{logname}}</p>
                 </div>
                 <i class="iconfont icon-gengduo"></i>
             </div>
@@ -13,7 +14,7 @@
                 <router-link to=""><i class="iconfont icon-shezhi"></i></router-link>
                 <router-link to=""><i class="iconfont icon-xiaoxizhongxin"></i></router-link>
             </div>
-            <div class="loginfixed2">
+            <div class="loginfixed2" :style="{'opacity':opacity}">
                 <router-link to=""><i class="iconfont icon-shezhi"></i></router-link>
                 <router-link to="">我的</router-link>
                 <router-link to=""><i class="iconfont icon-xiaoxizhongxin"></i></router-link>
@@ -31,8 +32,12 @@
     </div>
 </template>
 <script>
+import bus from '../bus.js'
 export default {
     data(){return{
+        logname:"",
+        scrolltop:0,
+        opacity:0,
         loginH:0,
         loginList:[
             {Lhref:"/want",Loga:"想看的电影和演出"},
@@ -49,7 +54,19 @@ export default {
     }},
     created(){
         this.loginH=window.innerWidth*0.5;
-    }
+    },
+    mounted(){
+        window.addEventListener("scroll",this.handleScroll);
+        //bus.$on("val",(data)=>{this.logname=data;console.log(this.logname)})
+         this.logname=sessionStorage.getItem('username');
+            //console.log(this.logname)
+    },
+    methods:{
+        handleScroll(){
+            this.scrolltop=window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+            this.opacity=this.scrolltop/50
+        },
+    },
 }
 </script>
 

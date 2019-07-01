@@ -11,7 +11,7 @@
                     <img src="hyr01.jpg" alt="">
                     <p class="screen">演唱会</p>
                     <i class="collect">9.2折</i>
-                    <p class="mtitle">费玉清告别演唱会费玉清告别演唱会</p>
+                    <p class="mtitle">费玉清告别演唱会</p>
                 </a>
                 <a href="javascript:;" class="release-time">6月8日</a>
             </li>
