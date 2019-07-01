@@ -51,7 +51,12 @@ router.get('/login',(req,res)=>{
 
 //获取电影院
 router.get("/cinema",(req,res)=>{
-	pool.query("SELECT * FROM cinema_list",(err,result)=>{
+	var start=req.query.start;
+	var count=req.query.count;
+	if(!start){start=0}
+	if(!count){count=7}
+	count=parseInt(count)
+	pool.query("SELECT * FROM cinema_list LIMIT ?,? ",[(start-1)*count,count],(err,result)=>{
 		if(err) throw err;
 //		console.log(result);
 		if(result.length>0){
@@ -74,7 +79,7 @@ router.get("/cinema",(req,res)=>{
 		})
 	})
 //根据条件查询电影
-	router.get("/selM",(req,res)=>{
+	/*router.get("/selM",(req,res)=>{
 		var str=req.query.str
 		pool.query("SELECT * FROM movie_list WHERE mtitle LIKE CONCAT('%',?,'%') OR mstar LIKE CONCAT('%',?,'%')",[str,str],(err,result)=>{
 			if(err) throw err;
@@ -84,9 +89,9 @@ router.get("/cinema",(req,res)=>{
 			res.send({code:400,msg:"请求失败"})
 		}
 		})
-	})
+	})*/
 //获取电影院详情
-		/*
+		
 router.get("/cinemadetail",(req,res)=>{
 	pool.query("SELECT * FROM cinema_list WHERE cid=?",[req.query.cid],(err,result)=>{
 		if(err) throw err;
@@ -97,9 +102,10 @@ router.get("/cinemadetail",(req,res)=>{
 			res.send({code:400,msg:"请求失败"})
 		}
 	})
-})*/
+})
 
 //获取电影播放详情
+
 router.get("/start",(req,res)=>{
 	pool.query("SELECT * FROM start_movie",(err,result)=>{
 		if(err) throw err;

@@ -18,9 +18,9 @@
                 <mt-tab-container-item id="video">
                     <cinema></cinema><!-- <message-list></message-list> -->
                 </mt-tab-container-item>
-                <mt-tab-container-item id="show">
-                    show<!-- <message-list></message-list> -->
-                </mt-tab-container-item>
+                <!-- <mt-tab-container-item id="show">
+                    show<message-list></message-list>
+                </mt-tab-container-item> -->
                 <mt-tab-container-item id="me">
                    <me></me>
                 </mt-tab-container-item>
@@ -40,12 +40,12 @@
                 <tabBarIcon :selectedImage="require('../assets/icon3.png')" :normalImage="require('../assets/icon03.png')" :focused="currentIndex[2].isSelect"></tabBarIcon>
                 <span class="normal" :class="{selcolor:currentIndex[2].isSelect}">影院</span>
             </mt-tab-item>
-            <mt-tab-item id="show" @click.native="change(3)">
+            <!-- <mt-tab-item id="show" @click.native="change(3)">
                 <tabBarIcon :selectedImage="require('../assets/icon4.png')" :normalImage="require('../assets/icon04.png')" :focused="currentIndex[3].isSelect"></tabBarIcon>
                 <span class="normal" :class="{selcolor:currentIndex[3].isSelect}">演出</span>
-            </mt-tab-item>
-            <mt-tab-item id="me" @click.native="change(4)" class="normalfont">
-                <tabBarIcon :selectedImage="require('../assets/icon5.png')" :normalImage="require('../assets/icon05.png')" :focused="currentIndex[4].isSelect"></tabBarIcon><span class="normal" :class="{selcolor:currentIndex[4].isSelect}">我的</span>
+            </mt-tab-item> -->
+            <mt-tab-item id="me" @click.native="change(3)" class="normalfont">
+                <tabBarIcon :selectedImage="require('../assets/icon5.png')" :normalImage="require('../assets/icon05.png')" :focused="currentIndex[3].isSelect"></tabBarIcon><span class="normal" :class="{selcolor:currentIndex[3].isSelect}">我的</span>
             </mt-tab-item>
         </mt-tabbar>
         
@@ -69,7 +69,6 @@ export default {
         //创建数组保留图片的焦点状态
         currentIndex:[
             {isSelect:true},
-            {isSelect:false},
             {isSelect:false},
             {isSelect:false},
             {isSelect:false}

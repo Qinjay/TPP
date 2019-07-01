@@ -29,7 +29,7 @@ export default {
             this.mapx=this.ticketList.mapX;
             this.mapy=this.ticketList.mapY;
             this.madd=this.ticketList.address;
-            console.log(this.ticketList)
+            // console.log(this.ticketList)
         })
     },
     mounted(){

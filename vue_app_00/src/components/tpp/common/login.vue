@@ -27,7 +27,7 @@
     </div>
 </template>
 <script>
-import bus from './bus.js'
+
 export default {
     data(){return{
         Height:window.innerHeight,
@@ -75,10 +75,7 @@ export default {
                 }else{
                     this.zname=result.data.data+this.value.slice(-5,-1);
                     sessionStorage.setItem('username', this.zname);
-                    // console.log(username)
-                    //bus.$emit("val",this.zname) //组件间传值--me-login.vue
                     this.$router.push("home");
-                    // console.log(result.data,this.zname)
                 }
             })
         },

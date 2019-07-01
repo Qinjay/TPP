@@ -4,8 +4,8 @@
             <div class="logDiv">
                 <div class="loginImg">
                     <img src="login.jpg" alt="">
-                    <p class="log" v-show="logname==''">立即登录</p>
-                    <p class="log"  v-show="logname">{{logname}}</p>
+                    <p class="log"  v-if="logname">{{logname}}</p>
+                    <p class="log" v-else>立即登录</p>
                 </div>
                 <i class="iconfont icon-gengduo"></i>
             </div>

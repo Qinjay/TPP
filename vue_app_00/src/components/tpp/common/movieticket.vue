@@ -54,9 +54,10 @@ export default {
         cname:"",
     }},
     props:["cid"],
-    created(){
+     mounted(){
         let params={cid:this.cid}
         this.axios.get("http://127.0.0.1:3000/user/cinemadetail",{params}).then(res=>{
+            // console.log(res)
             this.ticketList=res.data.data[0];
             this.cname=this.ticketList.cname
         })

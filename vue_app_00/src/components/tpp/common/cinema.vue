@@ -32,8 +32,9 @@
                     </p>
                 </div>
             </router-link> 
-            <div style="height:27px"></div>
+            <!-- <div style="height:27px"></div> -->
         </div>
+        <div @click="loadMore" class="loadbtn">{{btnText}}</div>
         
     </div>
 </template>
@@ -42,14 +43,27 @@
 export default {
     data(){return{
         cinemaList:[],
-        value:""
+        value:"",
+        count:7,
+        start:0,
+        btnText:"点击加载更多"
     }},
     created(){
-        this.axios.get("http://localhost:3000/user/cinema").then(result=>{
-            this.cinemaList=result.data.data;
-        })
+         this.loadMore()
     },
     methods:{
+        loadMore(){
+            this.start++;
+            let params={start:this.start,count:this.count}
+            this.axios.get("http://localhost:3000/user/cinema",{params}).then(result=>{             
+               var rows =this.cinemaList.concat(result.data.data)
+               if(result.data.data){
+                    this.cinemaList=rows;
+                    }else{
+                        this.btnText="(╥╯﹏╰╥)ง没了~"
+                    }
+        })
+        },
         selCinema(){
             let params={str:this.value}
             this.axios.get("http://localhost:3000/user/selC",{params}).then(result=>{
@@ -69,6 +83,12 @@ export default {
 </script>
 
 <style scoped>
+.loadbtn{
+    width:100%;
+    color: #8f8f94;
+    text-align: center;
+    padding:10px;
+}
     .top{
         position: fixed;
         top:0;
